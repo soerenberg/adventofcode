@@ -25,6 +25,7 @@ source-repository head
 
 library
   exposed-modules:
+      Grid
       Lib
       Parser
   other-modules:
@@ -66,6 +67,7 @@ test-suite adventofcode-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Tests.Grid
       Tests.Parser
       Paths_adventofcode
   autogen-modules:

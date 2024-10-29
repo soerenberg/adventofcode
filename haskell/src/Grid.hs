@@ -1,0 +1,52 @@
+module Grid (
+  boundingBox
+, fromDims
+, fromLines
+, fromLinesToList
+, neighbors4At
+, neighbors8At
+, toLines
+, setCoords
+, Grid
+, Z2
+) where
+
+import Data.Maybe
+import qualified Data.Map as M
+
+type Z2 = (Int, Int)
+type Grid a = M.Map Z2 a
+
+fromLines :: (Char -> a) -> [String] -> Grid a
+fromLines f ls = M.fromList . fromLinesToList f $ ls
+
+fromLinesToList :: (Char -> a) -> [String] -> [(Z2, a)]
+fromLinesToList  f xs = do (i, ls) <- zip [0..] xs
+                           (j, x) <- zip [0..] ls
+                           return ((i, j), f x)
+
+fromDims :: a -> Int -> Int -> Grid a
+fromDims x h w = M.fromList [((i, j), x) | i<-[0..(h-1)], j<-[0..(w-1)]]
+
+toLines :: Char -> (a -> Char) -> Grid a -> [String]
+toLines c f grid = do i <- [imin..imax]
+                      return $ map (charLookup i) [jmin..jmax]
+  where (imin, imax, jmin, jmax) = fromMaybe (0, 0, 0, 0) $ boundingBox grid
+        charLookup i' j' = fromMaybe c $ f <$> M.lookup (i', j') grid
+
+boundingBox :: Grid a -> Maybe (Int, Int, Int, Int)
+boundingBox grid = M.foldrWithKey f Nothing grid
+  where f (i, j) _ (Just (imin, imax, jmin, jmax)) =
+          Just (min i imin, max i imax, min j jmin, max j jmax)
+        f (i, j) _ Nothing = Just (i, i, j, j)
+
+neighbors8At :: Grid a -> Z2 -> [a]
+neighbors8At grid (i, j) = catMaybes $ map (flip M.lookup grid) coords
+  where coords = [(i+p, j+q) | p <- [-1, 0, 1], q <- [-1, 0, 1], (p,q) /= (0,0)]
+
+neighbors4At :: Grid a -> Z2 -> [a]
+neighbors4At grid (i, j) = catMaybes $ map (flip M.lookup grid) coords
+  where coords = [(i+p, j+q) | (p,q) <- [(-1, 0), (0, -1), (0, 1), (1, 0)]]
+
+setCoords :: [Z2] -> a -> Grid a -> Grid a
+setCoords ks x grid = foldr (M.update (\_ -> Just x)) grid ks
