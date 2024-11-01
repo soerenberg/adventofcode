@@ -1,6 +1,7 @@
 module Parser
-( module Text.Parsec
-, digits
+( --module Text.Parsec
+-- , 
+digits
 , eol
 , letters
 , nonDigits
