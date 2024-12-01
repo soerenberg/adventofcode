@@ -1,4 +1,3 @@
-{-# LANGUAGE TemplateHaskell #-}
 module Year2024.Day01 where
 
 import Data.List (sort)
@@ -6,8 +5,8 @@ import AdventOfCode
 
 
 totalDistance :: [(Int, Int)] -> Int
-totalDistance = sum . (map dist) . (uncurry zip) . (over both sort) . unzip
-  where dist (a,b) = abs (a-b)
+totalDistance = sum . map dist . uncurry zip . over both sort . unzip
+  where dist = abs . uncurry (-)
 
 similarityScore :: [(Int, Int)] -> Int
 similarityScore = sum . getScores . unzip
