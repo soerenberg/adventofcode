@@ -1,13 +1,15 @@
 module Parser
 ( --module Text.Parsec
--- , 
-digits
+Parser
+, digits
 , eol
 , letters
+, many
 , nonDigits
 , nonDigits1
 , nonSignedDigits
 , nonSignedDigits1
+, parse
 , signedFloat
 , signedInt
 , whitespace

@@ -52,6 +52,17 @@ library:
   source-dirs: src
 
 executables:
+  adventofcode2024:
+    main:                Main.hs
+    source-dirs:         app/Year2024
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -Wall
+    - -main-is Year2024.Main
+    dependencies:
+    - adventofcode
   adventofcode2022:
     main:                Main.hs
     source-dirs:         app/Year2022
