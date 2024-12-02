@@ -2,6 +2,7 @@ module Year2024.Main (main) where
 
 import AdventOfCode
 import qualified Year2024.Day01 as Day01
+import qualified Year2024.Day02 as Day02
 
 
 showSolutions :: (Show a, Show b) => (a, b) -> IO ()
@@ -10,6 +11,7 @@ showSolutions (partA, partB) = do putStrLn $ "part A: " ++ show partA
 
 getSolve :: String -> IO ()
 getSolve "1" = Day01.solve >>= showSolutions
+getSolve "2" = Day02.solve >>= showSolutions
 getSolve s   = putStrLn $ "invalid day " ++ s
 
 main :: IO ()
