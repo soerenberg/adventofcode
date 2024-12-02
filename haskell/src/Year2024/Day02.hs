@@ -6,6 +6,10 @@ import AdventOfCode
 countSafeLvls :: [[Int]] -> Int
 countSafeLvls = length . filter id . map isSafe
 
+countSafeLvls' :: [[Int]] -> Int
+countSafeLvls' = length . (filter or) . (map $ map isSafe). map subsets
+  where subsets ys = [[y | (i,y) <- zip [1..] ys, i /= k] | k <- [1..length ys]]
+
 isSafe :: [Int] -> Bool
 isSafe [] = True
 isSafe xs = let ds = zipWith (-) (tail xs) xs
@@ -18,4 +22,4 @@ line = digits `sepBy` whitespace <* eol
 solve :: IO (Int, Int)
 solve = do input <- pack <$> readFile "data/Year2024/day02.txt"
            let ps = fromRight [] $ parse (many line) "" input
-           return (countSafeLvls ps, 0)
+           return (countSafeLvls ps, countSafeLvls' ps)
