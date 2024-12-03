@@ -1,21 +1,31 @@
 module Parser
 ( --module Text.Parsec
 Parser
+, anyChar
+, chainl
+, char
 , digits
+, eof
 , eol
 , letters
+, lookAhead
 , many
+, manyTill
 , nonDigits
 , nonDigits1
 , nonSignedDigits
 , nonSignedDigits1
 , parse
 , sepBy
+, sepEndBy
 , signedFloat
 , signedInt
+, string
+, try
 , whitespace
 , whitespace1
 , unsignedInt
+, (<|>)
 ) where
 
 import Text.Parsec.Text (Parser)
