@@ -1,7 +1,5 @@
 module Year2024.Day03 where
-
 import AdventOfCode
-
 
 data Stmt = N Int | Do | Dont deriving (Eq, Show)
 
@@ -21,7 +19,14 @@ eval [] = 0
 eval ((N i):xs) = i + eval xs
 eval (_:xs) = eval xs
 
+eval' :: Bool -> [Stmt] -> Int
+eval' _ [] = 0
+eval' True ((N i):xs) = i + eval' True xs
+eval' False ((N _):xs) =  eval' False xs
+eval' _ (Do:xs) = eval' True xs
+eval' _ (Dont:xs) = eval' False xs
+
 solve :: IO (Int, Int)
 solve = do input <- pack <$> readFile "data/Year2024/day03.txt"
            let ps = fromRight [] $ parse statements "" input
-           return (eval ps, 0)
+           return (eval ps, eval' True ps)
