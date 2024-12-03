@@ -5,9 +5,9 @@ data Stmt = N Int | Do | Dont deriving (Eq, Show)
 
 statements :: Parser [Stmt]
 statements = noise >> many (stmt <* noise)
-  where stmt = (try mul <|> try do' <|> try dont)
+  where stmt = try mul <|> try do' <|> try dont
         mul = do _ <- string "mul("
-                 i <- (*) <$> digits <* char ',' <*> (digits <* string ")")
+                 i <- (*) <$> digits <* char ',' <*> digits <* string ")"
                  return $ N i
         do' = string "do()" >> return Do
         dont = string "don't()" >> return Dont
