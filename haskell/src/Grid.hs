@@ -3,8 +3,11 @@ module Grid (
 , fromDims
 , fromLines
 , fromLinesToList
+, lookupSeq
+, lookupSeqAt
 , neighbors4At
 , neighbors8At
+, neighbors9At
 , toLines
 , setCoords
 , Grid
@@ -44,9 +47,19 @@ neighbors8At :: Grid a -> Z2 -> [a]
 neighbors8At grid (i, j) = catMaybes $ map (flip M.lookup grid) coords
   where coords = [(i+p, j+q) | p <- [-1, 0, 1], q <- [-1, 0, 1], (p,q) /= (0,0)]
 
+neighbors9At :: Grid a -> Z2 -> [a]
+neighbors9At grid (i, j) = catMaybes $ map (flip M.lookup grid) coords
+  where coords = [(i+p, j+q) | p <- [-1, 0, 1], q <- [-1, 0, 1]]
+
 neighbors4At :: Grid a -> Z2 -> [a]
 neighbors4At grid (i, j) = catMaybes $ map (flip M.lookup grid) coords
   where coords = [(i+p, j+q) | (p,q) <- [(-1, 0), (0, -1), (0, 1), (1, 0)]]
 
 setCoords :: [Z2] -> a -> Grid a -> Grid a
 setCoords ks x grid = foldr (M.update (\_ -> Just x)) grid ks
+
+lookupSeq :: [Z2] -> Grid a -> [a]
+lookupSeq xs g = fromMaybe [] . sequence . map (\c -> M.lookup c g) $ xs
+
+lookupSeqAt :: Z2 -> [Z2] -> Grid a -> [a]
+lookupSeqAt (x,y) zs = lookupSeq [(x+z,y+z') | (z,z')<-zs]
