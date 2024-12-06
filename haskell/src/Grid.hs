@@ -1,5 +1,6 @@
 module Grid (
-  boundingBox
+  addZ2
+, boundingBox
 , fromDims
 , fromLines
 , fromLinesToList
@@ -8,8 +9,9 @@ module Grid (
 , neighbors4At
 , neighbors8At
 , neighbors9At
-, toLines
+, rot90cw
 , setCoords
+, toLines
 , Grid
 , Z2
 ) where
@@ -63,3 +65,9 @@ lookupSeq xs g = fromMaybe [] . sequence . map (\c -> M.lookup c g) $ xs
 
 lookupSeqAt :: Z2 -> [Z2] -> Grid a -> [a]
 lookupSeqAt (x,y) zs = lookupSeq [(x+z,y+z') | (z,z')<-zs]
+
+addZ2 :: Z2 -> Z2 -> Z2
+addZ2 (a,b) (x,y) = (a+x, b+y)
+
+rot90cw :: Z2 -> Z2
+rot90cw (x,y) = (y,-x)
