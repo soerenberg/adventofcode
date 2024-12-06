@@ -26,6 +26,10 @@ walk g = do posDir <- (,) <$> use pos <*> use dir
                                       walk g
                    (Just True) -> dir %= rot90cw >> walk g
 
+countLoops :: S -> Grid Bool -> [Z2] -> Int
+countLoops s g ps = foldr f 0 ps
+  where f p n = maybe (1+n) (const n) $ evalState (walk $ M.insert p True g) s
+
 solve :: IO (Maybe Int, Int)
 solve = do g <-  fromLines id . lines <$> readFile "data/Year2024/day06.txt"
            let p = M.foldrWithKey (\k c t -> if c=='^' then k else t) (0,0) g
@@ -33,4 +37,4 @@ solve = do g <-  fromLines id . lines <$> readFile "data/Year2024/day06.txt"
 
            let s = S p (-1,0) (S.singleton p) S.empty
            let (r,final) = runState (walk gb) s
-           return (r, 0)
+           return (r, countLoops s gb (S.toList . _vis $ final))
