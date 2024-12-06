@@ -1,12 +1,11 @@
 module Year2024.Day05 where
 import qualified Data.Map as M
 import qualified Data.Set as S
-import Data.Ord (Ordering)
 
 import AdventOfCode
 
-makeTable :: [(Int,Int)] -> M.Map Int (S.Set Int)
-makeTable xs = foldr update (M.empty) xs
+lookupFromRules :: [(Int,Int)] -> M.Map Int (S.Set Int)
+lookupFromRules = foldr update M.empty
  where update (x,y) t = M.insertWith S.union x (S.singleton y) t
 
 makeCmp :: M.Map Int (S.Set Int) -> Int -> Int -> Ordering
@@ -22,6 +21,9 @@ partA c = sum . map mid . filter (isOrdered c)
 isOrdered :: (a -> a -> Ordering) -> [a] -> Bool
 isOrdered c = all (==LT) . (zipWith c <*> tail)
 
+partB :: (Int -> Int -> Ordering) -> [[Int]] -> Int
+partB c = sum . map (mid . sortBy c) . filter (not . isOrdered c)
+
 file :: Parser ([(Int,Int)], [[Int]])
 file = do rs <- many $ (,) <$> digits <* char '|' <*> digits <* eol
           _ <- eol
@@ -31,5 +33,5 @@ file = do rs <- many $ (,) <$> digits <* char '|' <*> digits <* eol
 solve :: IO (Int, Int)
 solve = do input <- pack <$> readFile "data/Year2024/day05.txt"
            let (rs, us) = fromRight ([],[]) $ parse file "" input
-           let cmp = makeCmp . makeTable $ rs
-           return (partA cmp us, 0)
+           let cmp = makeCmp . lookupFromRules $ rs
+           return (partA cmp us, partB cmp us)
