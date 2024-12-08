@@ -8,6 +8,7 @@ import qualified Year2024.Day04 as Day04
 import qualified Year2024.Day05 as Day05
 import qualified Year2024.Day06 as Day06
 import qualified Year2024.Day07 as Day07
+import qualified Year2024.Day08 as Day08
 
 
 showSolutions :: (Show a, Show b) => (a, b) -> IO ()
@@ -22,6 +23,7 @@ getSolve "4" = Day04.solve >>= showSolutions
 getSolve "5" = Day05.solve >>= showSolutions
 getSolve "6" = Day06.solve >>= showSolutions
 getSolve "7" = Day07.solve >>= showSolutions
+getSolve "8" = Day08.solve >>= showSolutions
 getSolve s   = putStrLn $ "invalid day " ++ s
 
 main :: IO ()

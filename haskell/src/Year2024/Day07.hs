@@ -1,5 +1,6 @@
 module Year2024.Day07 where
 import AdventOfCode
+import Data.List (sort)
 
 
 check :: [Int -> Int -> Int] -> Int -> Int -> [Int] -> [Int]

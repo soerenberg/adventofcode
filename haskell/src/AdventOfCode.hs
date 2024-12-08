@@ -12,6 +12,7 @@ module AdventOfCode (
   module Data.Either,
   module Data.Maybe,
   module Data.Text,
+  module Data.Tuple,
   module Debug.Trace,
   module Lens.Micro.Platform,
 
@@ -39,6 +40,7 @@ import Data.Either
 import Data.List (minimumBy, sortBy)
 import Data.Maybe
 import Data.Text (pack)
+import Data.Tuple (swap)
 import Debug.Trace
 import Lens.Micro.Platform
 
