@@ -18,6 +18,9 @@ makeAntinodes f xs = do x <- xs
                         guard $ x/= y
                         f x y
 
+leapAll :: (Int, Int) -> Z2 -> Z2 -> [Z2]
+leapAll b v w = [v] ++ leapfrog b v (minusZ2 v w)
+
 leapfrog :: (Int, Int) -> Z2 -> Z2 -> [Z2]
 leapfrog b (sx,sy) v@(vx,vy) = let w = (sx+vx, sy+vy) in
     if inBounds b w then w:(leapfrog b w v) else []
@@ -35,4 +38,5 @@ solve :: IO (Int, Int)
 solve = do ls <- lines <$> readFile "data/Year2024/day08.txt"
            let bounds = (length ls, length . (!!0) $ ls)
            let groups = groupBy . fromLines id $ ls
-           return (countAntinodes (leapSingle bounds) groups, 0)
+           return (countAntinodes (leapSingle bounds) groups,
+                   countAntinodes (leapAll bounds) groups)
