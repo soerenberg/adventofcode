@@ -13,8 +13,6 @@ findEnds g n z = do let isN = (==n) <$> M.lookup z g
 
 solve :: IO (Int, Int)
 solve = do
-  -- g <- fromLines digitToInt . lines <$> readFile "data/Year2024/day10.txt"
-  -- print $ M.size g
-  return (0,0)
-  -- let ends = map (findEnds g 0) (M.keys g)
-  -- return (sum . map (S.size . S.fromList) $ ends, sum . map length $ ends)
+  g <- fromLines digitToInt . lines <$> readFile "data/Year2024/day10.txt"
+  let ends = map (findEnds g 0) (M.keys g)
+  return (sum . map (S.size . S.fromList) $ ends, sum . map length $ ends)
