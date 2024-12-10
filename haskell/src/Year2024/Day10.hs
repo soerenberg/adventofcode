@@ -1,4 +1,3 @@
-{-# LANGUAGE TemplateHaskell #-}
 module Year2024.Day10 where
 import qualified Data.Map as M
 import qualified Data.Set as S
@@ -13,6 +12,7 @@ findEnds g n z = do let isN = (==n) <$> M.lookup z g
                             findEnds g (n+1) nxt
 
 solve :: IO (Int, Int)
-solve = do g <- fromLines digitToInt . lines <$> readFile "data/Year2024/day10.txt"
-           let ends = map (findEnds g 0) (M.keys g)
-           return (sum . map (S.size . S.fromList) $ ends, 0)
+solve = do
+  g <- fromLines digitToInt . lines <$> readFile "data/Year2024/day10.txt"
+  let ends = map (findEnds g 0) (M.keys g)
+  return (sum . map (S.size . S.fromList) $ ends, sum . map length $ ends)
