@@ -1,6 +1,7 @@
 module Grid (
   addZ2
 , boundingBox
+, dirs4
 , fromDims
 , fromLines
 , fromLinesToList
@@ -71,3 +72,6 @@ addZ2 (a,b) (x,y) = (a+x, b+y)
 
 rot90cw :: Z2 -> Z2
 rot90cw (x,y) = (y,-x)
+
+dirs4 :: Z2 -> [Z2]
+dirs4 (i,j) = [(i+p, j+q) | (p,q) <- [(-1, 0), (0, -1), (0, 1), (1, 0)]]
