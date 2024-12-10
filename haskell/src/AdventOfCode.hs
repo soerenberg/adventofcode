@@ -35,7 +35,7 @@ import Control.Monad.State
 import Control.Monad.Trans.Maybe
 import Control.Monad.State.Lazy
 import Data.Bits
-import Data.Char (chr,ord)
+import Data.Char
 import Data.Either
 import Data.List (minimumBy, sortBy)
 import Data.Maybe
