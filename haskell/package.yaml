@@ -37,6 +37,11 @@ dependencies:
 - utf8-string
 - vector
 
+default-extensions:
+  - BangPatterns
+  - TemplateHaskell
+  - TupleSections
+
 ghc-options:
 - -Wall
 - -Wcompat

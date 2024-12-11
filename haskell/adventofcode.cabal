@@ -43,12 +43,17 @@ library
       Year2024.Day08
       Year2024.Day09
       Year2024.Day10
+      Year2024.Day11
   other-modules:
       Paths_adventofcode
   autogen-modules:
       Paths_adventofcode
   hs-source-dirs:
       src
+  default-extensions:
+      BangPatterns
+      TemplateHaskell
+      TupleSections
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       aeson
@@ -77,6 +82,10 @@ executable adventofcode2022
       Paths_adventofcode
   hs-source-dirs:
       app/Year2022
+  default-extensions:
+      BangPatterns
+      TemplateHaskell
+      TupleSections
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Year2022.Main
   build-depends:
       adventofcode
@@ -106,6 +115,10 @@ executable adventofcode2024
       Paths_adventofcode
   hs-source-dirs:
       app/Year2024
+  default-extensions:
+      BangPatterns
+      TemplateHaskell
+      TupleSections
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Year2024.Main
   build-depends:
       adventofcode
@@ -138,6 +151,10 @@ test-suite adventofcode-test
       Paths_adventofcode
   hs-source-dirs:
       test
+  default-extensions:
+      BangPatterns
+      TemplateHaskell
+      TupleSections
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       adventofcode
