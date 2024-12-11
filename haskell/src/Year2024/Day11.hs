@@ -20,4 +20,4 @@ blinkNTimes m n = M.foldr (+) 0 . foldr (\_ l -> blinkAll l) m $ [1..n]
 solve :: IO (Int, Int)
 solve = do input <- map read . words <$> readFile "data/Year2024/day11.txt"
            let m = M.fromList . map (,1) $ input
-           return $ over both (blinkNTimes m) (25, 0)
+           return $ over both (blinkNTimes m) (25, 75)
