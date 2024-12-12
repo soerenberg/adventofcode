@@ -26,8 +26,33 @@ numExposedSides g c z = sum $ do
 partA :: [(Int, [Z2])] -> Int
 partA = sum . map (\(k,xs) -> k * (length xs))
 
+partB :: [(Int, [Z2])] -> Int
+partB = sum . map ((\ys -> length ys * (countSides . S.fromList $ ys)) . snd)
+
+countSides :: S.Set Z2 -> Int
+countSides s = foldr (\f b -> b + f s) 0 [scanRightToLeft, scanLeftToRight,
+                                          scanTopToBottom, scanBottomToTop]
+  where scanLeftToRight = scan (\(a,b)->(a,b-1)) snd fst
+        scanRightToLeft = scan (\(a,b)->(a,b+1)) snd fst
+        scanTopToBottom = scan (\(a,b)->(a-1,b)) fst snd
+        scanBottomToTop = scan (\(a,b)->(a+1,b)) fst snd
+
+scan :: (Z2 -> Z2) -> (Z2 -> Int) -> (Z2 -> Int) -> S.Set Z2 -> Int
+scan getNeigh getCoord getOrtho s = sum . map f . S.toList . S.map getCoord $ s
+  where f j = countAdjacents . orthoComponents . S.filter exposed . slice j $ s
+        slice k = S.filter ((==k) . getCoord)
+        exposed z = not . S.member (getNeigh z) $ s
+        orthoComponents = L.sort . map getOrtho . S.toList
+
+countAdjacents :: [Int] -> Int
+countAdjacents [] = 0
+countAdjacents [_] = 1
+countAdjacents (x:y:xs)
+  | x >= y-1 = countAdjacents (y:xs)
+  | otherwise = 1 + countAdjacents (y:xs)
+
 solve :: IO (Int, Int)
 solve = do input <- readFile "data/Year2024/day12.txt"
            let g = fromLines id . lines $ input
            let rs = evalState (exploreAllRegions g) S.empty
-           return (partA rs, 0)
+           return (partA rs, partB rs)
