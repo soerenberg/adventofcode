@@ -12,7 +12,7 @@ import qualified Year2024.Day08 as Day08
 import qualified Year2024.Day09 as Day09
 import qualified Year2024.Day10 as Day10
 import qualified Year2024.Day11 as Day11
--- import qualified Year2024.Day12 as Day12
+import qualified Year2024.Day12 as Day12
 -- import qualified Year2024.Day13 as Day13
 -- import qualified Year2024.Day14 as Day14
 -- import qualified Year2024.Day15 as Day15
@@ -43,7 +43,7 @@ getSolve "8" = Day08.solve >>= showSolutions
 getSolve "9" = Day09.solve >>= showSolutions
 getSolve "10" = Day10.solve >>= showSolutions
 getSolve "11" = Day11.solve >>= showSolutions
--- getSolve "12" = Day12.solve >>= showSolutions
+getSolve "12" = Day12.solve >>= showSolutions
 -- getSolve "13" = Day13.solve >>= showSolutions
 -- getSolve "14" = Day14.solve >>= showSolutions
 -- getSolve "15" = Day15.solve >>= showSolutions
