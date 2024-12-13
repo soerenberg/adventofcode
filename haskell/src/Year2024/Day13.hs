@@ -1,7 +1,6 @@
 module Year2024.Day13 where
 import AdventOfCode
 
-
 data Machine = Machine { _a :: Z2, _b :: Z2, _prize :: Z2 } deriving (Eq, Show)
 makeLenses ''Machine
 
@@ -19,13 +18,11 @@ eval [] = 0
 eval ((x,y):xs) = 3*x + y + eval xs
 
 machine :: Parser Machine
-machine = do ba <- (,) <$> (nonDigits >> digits) <*> (nonDigits >> digits) <* eol
-             bb <- (,) <$> (nonDigits >> digits) <*> (nonDigits >> digits) <* eol
-             p  <- (,) <$> (nonDigits >> digits) <*> (nonDigits >> digits) <* eol
-             _ <- whitespace
-             return $ Machine ba bb p
+machine = Machine <$> line2Digits <*> line2Digits <*> line2Digits <* whitespace
 
 solve :: IO (Int, Int)
 solve = do input <- pack <$> readFile "data/Year2024/day13.txt"
            let ms = fromRight [] $ parse (many machine) "" input
-           return (calcTokens ms, 0)
+           let n = 10000000000000
+           let ms' = map (\m -> m & prize %~ (\(x,y) -> (x+n,y+n)) ) ms
+           return (calcTokens ms, calcTokens ms')
