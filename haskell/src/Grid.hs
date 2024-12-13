@@ -5,6 +5,8 @@ module Grid (
 , fromDims
 , fromLines
 , fromLinesToList
+, isInt
+, isZ2
 , lookupSeq
 , lookupSeqAt
 , neighbors4At
@@ -19,6 +21,7 @@ module Grid (
 
 import Data.Maybe
 import qualified Data.Map as M
+import Lens.Micro.Platform (both, over)
 
 type Z2 = (Int, Int)
 type Grid a = M.Map Z2 a
@@ -75,3 +78,9 @@ rot90cw (x,y) = (y,-x)
 
 dirs4 :: Z2 -> [Z2]
 dirs4 (i,j) = [(i+p, j+q) | (p,q) <- [(-1, 0), (0, -1), (0, 1), (1, 0)]]
+
+isInt :: RealFrac a => a -> Bool
+isInt x = x == fromInteger (round x)
+
+isZ2 :: RealFrac a => (a,a) -> Bool
+isZ2 = uncurry (&&) . over both isInt
