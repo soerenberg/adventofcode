@@ -38,6 +38,21 @@ childsA p v g = let w = p `addZ2` v in
                   BoxL -> (w,BoxL):(childsA w v g)
                   _ -> []
 
+childsB :: Z2 -> Z2 -> Grid F -> [(Z2, F)]
+childsB p v g = let w = addZ2 p v in
+  case (v, M.findWithDefault Wall w g) of
+    ((-1,0),BoxL) -> (w,BoxL):(addZ2 w (0,1), BoxR)
+                     :(childsB w v g ++ childsB (addZ2 w (0,1)) v g)
+    ((-1,0),BoxR) -> (w,BoxR):(addZ2 w (0,-1), BoxL)
+                     :(childsB w v g ++ childsB (addZ2 w (0,-1)) v g)
+    ((1,0),BoxL) -> (w,BoxL):(addZ2 w (0,1), BoxR)
+                    :(childsB w v g ++ childsB (addZ2 w (0,1)) v g)
+    ((1,0),BoxR) -> (w,BoxR):(addZ2 w (0,-1), BoxL)
+                    :(childsB w v g ++ childsB (addZ2 w (0,-1)) v g)
+    (_,BoxL) -> (w,BoxL):(childsB w v g)
+    (_,BoxR) -> (w,BoxR):(childsB w v g)
+    (_,_) -> []
+
 gps :: S F -> Int
 gps = toGPS . M.keys . M.filter (==BoxL) . _warehouse
   where toGPS [] = 0
@@ -72,6 +87,6 @@ solve = do txt <- pack <$> readFile "data/Year2024/day15.txt"
            case parsed of
              (Right (p,g,pb,gb,stmts)) -> do
                return (gps . execState (run childsA) $ (S p g stmts),
-                       0)
+                       gps . execState (run childsB) $ (S pb gb stmts))
              (Left e) -> do print e
                             return (0,0)
