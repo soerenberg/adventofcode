@@ -1,5 +1,6 @@
 module Grid (
   addZ2
+, addZ4
 , boundingBox
 , dirs4
 , fromDims
@@ -18,6 +19,8 @@ module Grid (
 , toLines
 , Grid
 , Z2
+, Z3
+, Z4
 ) where
 
 import Data.Maybe
@@ -25,6 +28,9 @@ import qualified Data.Map as M
 import Lens.Micro.Platform (both, over)
 
 type Z2 = (Int, Int)
+type Z3 = (Int, Int, Int)
+type Z4 = (Int, Int, Int, Int)
+
 type Grid a = M.Map Z2 a
 
 fromLines :: (Char -> a) -> [String] -> Grid a
@@ -79,6 +85,9 @@ lookupSeqAt (x,y) zs = lookupSeq [(x+z,y+z') | (z,z')<-zs]
 
 addZ2 :: Z2 -> Z2 -> Z2
 addZ2 (a,b) (x,y) = (a+x, b+y)
+
+addZ4 :: Z4 -> Z4 -> Z4
+addZ4 (a,b,c,d) (e,f,g,h) = (a+e, b+f, c+g, d+h)
 
 rot90cw :: Z2 -> Z2
 rot90cw (x,y) = (y,-x)
