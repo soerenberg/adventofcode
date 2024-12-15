@@ -25,6 +25,7 @@ Parser
 , try
 , whitespace
 , whitespace1
+, whitespaceEOL
 , unsignedInt
 , (<|>)
 ) where
@@ -35,6 +36,9 @@ import Text.Parsec
 
 eol :: Parser Char
 eol = char '\n'
+
+whitespaceEOL :: Parser String
+whitespaceEOL = many $ oneOf " \t\n"
 
 whitespace :: Parser String
 whitespace = many $ oneOf " \t"

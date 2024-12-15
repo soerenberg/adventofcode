@@ -14,8 +14,8 @@ import qualified Year2024.Day10 as Day10
 import qualified Year2024.Day11 as Day11
 import qualified Year2024.Day12 as Day12
 import qualified Year2024.Day13 as Day13
--- import qualified Year2024.Day14 as Day14
--- import qualified Year2024.Day15 as Day15
+import qualified Year2024.Day14 as Day14
+import qualified Year2024.Day15 as Day15
 -- import qualified Year2024.Day16 as Day16
 -- import qualified Year2024.Day17 as Day17
 -- import qualified Year2024.Day18 as Day18
@@ -45,8 +45,8 @@ getSolve "10" = Day10.solve >>= showSolutions
 getSolve "11" = Day11.solve >>= showSolutions
 getSolve "12" = Day12.solve >>= showSolutions
 getSolve "13" = Day13.solve >>= showSolutions
--- getSolve "14" = Day14.solve >>= showSolutions
--- getSolve "15" = Day15.solve >>= showSolutions
+getSolve "14" = Day14.solve >>= showSolutions
+getSolve "15" = Day15.solve >>= showSolutions
 -- getSolve "16" = Day16.solve >>= showSolutions
 -- getSolve "17" = Day17.solve >>= showSolutions
 -- getSolve "18" = Day18.solve >>= showSolutions

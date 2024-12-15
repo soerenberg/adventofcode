@@ -14,6 +14,7 @@ module Grid (
 , neighbors9At
 , rot90cw
 , setCoords
+, toGridListWith
 , toLines
 , Grid
 , Z2
@@ -33,6 +34,12 @@ fromLinesToList :: (Char -> a) -> [String] -> [(Z2, a)]
 fromLinesToList  f xs = do (i, ls) <- zip [0..] xs
                            (j, x) <- zip [0..] ls
                            return ((i, j), f x)
+
+-- TODO replace fromLinesToList with toGridListWith
+toGridListWith :: (a -> b) -> [[a]] -> [(Z2, b)]
+toGridListWith  f xs = do (i, ls) <- zip [0..] xs
+                          (j, x) <- zip [0..] ls
+                          return ((i, j), f x)
 
 fromDims :: a -> Int -> Int -> Grid a
 fromDims x h w = M.fromList [((i, j), x) | i<-[0..(h-1)], j<-[0..(w-1)]]
