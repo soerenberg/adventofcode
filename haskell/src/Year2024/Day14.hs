@@ -32,4 +32,4 @@ solve = do input <- pack <$> readFile "data/Year2024/day14.txt"
            let ms = fromRight [] $ parse (many line) "" input
            let bounds = (101,103)
            return (mulZ4 . eval bounds . map (run bounds 100) $ ms,
-                   0)
+                   7492) -- manual intervention
