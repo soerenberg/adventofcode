@@ -67,5 +67,7 @@ solve = do xs <- lines <$> readFile "data/Year2024/day16.txt"
            let (s, _) = runBacktrackState initGState initState (run g)
 
            let partA = minimum . map fst $ s
+           let bestPaths = filter ((==partA) . fst) $ s
+           let partB = S.size . S.unions . map (_seats . snd) $ bestPaths
 
-           return (partA,0)
+           return (partA,partB)
