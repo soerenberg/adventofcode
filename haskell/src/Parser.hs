@@ -8,6 +8,7 @@ Parser
 , eof
 , eol
 , letters
+, lineDigit
 , line2Digits
 , lookAhead
 , many
@@ -78,6 +79,9 @@ signedFloat = do s <- option 1.0 ((char '+' >> return 1.0) <|>
                  i <- many1 digit
                  d <- option ".0" ((:) <$> char '.' <*> many1 digit)
                  return . (*s) . read $ i ++ d
+
+lineDigit :: Parser Int
+lineDigit = (nonDigits >> digits) <* nonDigits <* eol
 
 line2Digits :: Parser (Int, Int)
 line2Digits = (,) <$> (nonDigits >> digits) <*> (nonDigits >> digits) <* eol

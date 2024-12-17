@@ -49,6 +49,7 @@ library
       Year2024.Day14
       Year2024.Day15
       Year2024.Day16
+      Year2024.Day17
   other-modules:
       Paths_adventofcode
   autogen-modules:
@@ -62,6 +63,7 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       aeson
+    , array
     , base >=4.7 && <5
     , bytestring
     , containers
@@ -95,6 +97,7 @@ executable adventofcode2022
   build-depends:
       adventofcode
     , aeson
+    , array
     , base >=4.7 && <5
     , bytestring
     , containers
@@ -128,6 +131,7 @@ executable adventofcode2024
   build-depends:
       adventofcode
     , aeson
+    , array
     , base >=4.7 && <5
     , bytestring
     , containers
@@ -164,6 +168,7 @@ test-suite adventofcode-test
   build-depends:
       adventofcode
     , aeson
+    , array
     , base >=4.7 && <5
     , bytestring
     , containers
