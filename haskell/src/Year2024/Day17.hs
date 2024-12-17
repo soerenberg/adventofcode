@@ -26,6 +26,15 @@ eval a b c i xs =
     combo _ b _ 5 = b
     combo _ _ c 6 = c
 
+solveB :: (Array Int (Int, Int)) -> [Int] -> Int -> Int -> [Int]
+solveB as ys ts n = if n == length ys
+                    then return ts
+                    else do t <- [0..7]
+                            let bs = 8*ts + t
+                            if drop (length ys - (n+1)) ys == eval bs 0 0 0 as
+                            then solveB as ys bs (n+1)
+                            else mzero
+
 line :: Parser (Int,Int,Int,[Int])
 line = do a <- string "Register A: " >> digits <* eol
           b <- string "Register B: " >> digits <* eol
@@ -49,4 +58,4 @@ solve = do input <- pack <$> readFile "data/Year2024/day17.txt"
              (Right (a,b,c,xs)) -> do --
                let is = pair xs
                let as = listArray (0, length is - 1) is
-               return (eval a b c 0 as, 0)
+               return (eval a b c 0 as, minimum . solveB as xs 0 $ 0)
