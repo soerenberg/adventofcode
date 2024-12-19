@@ -29,7 +29,7 @@ partB :: Int -> Int -> [Z2] -> Maybe Int
 partB _ 0 _ = Nothing
 partB l n xs = maybe (partB l (n-1) xs) (Just . const (n+1)) (partA l n xs)
 
-solve :: IO (Int, Int)
+solve :: IO (Maybe Int, Maybe Int)
 solve = do input <- pack <$> readFile "data/Year2024/day18.txt"
            let xs = fromRight [] $ parse (many line2Digits) "" input
            return (partA 70 1024 xs, partB 70 (length xs) xs)
