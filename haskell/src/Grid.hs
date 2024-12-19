@@ -11,6 +11,7 @@ module Grid (
 , lookupSeq
 , lookupSeqAt
 , neighbors4At
+, neighbors4AtList
 , neighbors8At
 , neighbors9At
 , rot90cw
@@ -72,6 +73,10 @@ neighbors9At grid (i, j) = catMaybes $ map (flip M.lookup grid) coords
 
 neighbors4At :: Grid a -> Z2 -> [a]
 neighbors4At grid (i, j) = catMaybes $ map (flip M.lookup grid) coords
+  where coords = [(i+p, j+q) | (p,q) <- [(-1, 0), (0, -1), (0, 1), (1, 0)]]
+
+neighbors4AtList :: Grid a -> Z2 -> [(Z2,a)]
+neighbors4AtList grid (i, j) = catMaybes $ map (\z -> (z,) <$> M.lookup z grid) coords
   where coords = [(i+p, j+q) | (p,q) <- [(-1, 0), (0, -1), (0, 1), (1, 0)]]
 
 setCoords :: [Z2] -> a -> Grid a -> Grid a
