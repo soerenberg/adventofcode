@@ -14,12 +14,12 @@ exploreRegion g p z =
      if isVisited || (not matches) then return (0,[])
      else do modify $ S.insert z
              let fnc = numExposedSides g p z
-             rs <- mapM (exploreRegion g p) (dirs4 z)
+             rs <- mapM (exploreRegion g p) (dirs4From z)
              return $ foldr (\(k,ys) (k',ys') -> (k+k',ys++ys')) (fnc,[z]) rs
 
 numExposedSides :: Grid Char -> Char -> Z2 -> Int
 numExposedSides g c z = sum $ do
-  v <- dirs4 z
+  v <- dirs4From z
   let match = fromMaybe False $ (==c) <$> M.lookup v g
   if match then return 0 else return 1
 

@@ -8,7 +8,7 @@ findEnds :: Grid Int -> Int -> Z2 -> [Z2]
 findEnds g n z = do let isN = (==n) <$> M.lookup z g
                     guard $ fromMaybe False isN
                     if n == 9 then [z]
-                    else do nxt <- dirs4 z
+                    else do nxt <- dirs4From z
                             findEnds g (n+1) nxt
 
 solve :: IO (Int, Int)
