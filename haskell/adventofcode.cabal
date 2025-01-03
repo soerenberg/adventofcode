@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       AdventOfCode
+      Graph
       Grid
       Lib
       OptParse
@@ -63,7 +64,8 @@ library
       TupleSections
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      aeson
+      PSQueue
+    , aeson
     , array
     , base >=4.7 && <5
     , bytestring
@@ -96,7 +98,8 @@ executable adventofcode2022
       TupleSections
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Year2022.Main
   build-depends:
-      adventofcode
+      PSQueue
+    , adventofcode
     , aeson
     , array
     , base >=4.7 && <5
@@ -130,7 +133,8 @@ executable adventofcode2024
       TupleSections
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Year2024.Main
   build-depends:
-      adventofcode
+      PSQueue
+    , adventofcode
     , aeson
     , array
     , base >=4.7 && <5
@@ -154,6 +158,7 @@ test-suite adventofcode-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Tests.Graph
       Tests.Grid
       Tests.Parser
       Paths_adventofcode
@@ -167,7 +172,8 @@ test-suite adventofcode-test
       TupleSections
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      adventofcode
+      PSQueue
+    , adventofcode
     , aeson
     , array
     , base >=4.7 && <5
