@@ -19,7 +19,7 @@ module AdventOfCode (
   minimumBy,
   sortBy,
 
-  -- module Graph,
+  module Graph,
   module Grid,
   -- module LogicProgramming,
   -- module NumberTheory,
@@ -47,7 +47,7 @@ import Lens.Micro.Platform
 import qualified Data.Map as M
 import qualified Data.Set as S
 
--- import Graph
+import Graph
 import Grid
 -- import LogicProgramming
 -- import NumberTheory
