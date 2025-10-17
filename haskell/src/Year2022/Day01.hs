@@ -1,22 +1,27 @@
-{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE OverloadedStrings #-}
 module Year2022.Day01 where
 
-import qualified Data.Map as M
-
-import AdventOfCode
-
-
-count :: String -> (Int, Int)
-count = count' 0 0 1
-  where count' n m _ [] = (n, m)
-        count' n m c (x:xs) = let n' = n + toNum x
-                                  m' = if n' == -1 && m ==0 then c else m in
-                              count' n' m' (c+1) xs
-        toNum '(' = 1
-        toNum ')' = -1
-        toNum _ = 0
+import Data.List (sortBy)
+import qualified Data.Text as T
+import Data.Text.Read (decimal)
 
 
-solve :: IO (Int, Int)
-solve = do input <- readFile "data/Year2022/day01.txt"
-           return $ count input
+readInt :: T.Text -> Either String Int
+readInt t = fst <$> decimal t
+
+sumLines :: T.Text -> Either String Int
+sumLines xs = sum <$> mapM readInt (T.lines xs)
+
+readCalories :: T.Text -> Either String [Int]
+readCalories t = sequence $ map sumLines splits
+  where splits = T.splitOn "\n\n" t
+
+top3Calories :: Either String [Int] -> Either String [Int]
+top3Calories x = (take 3) . sortBy (flip compare) <$> x
+
+solve :: String -> Either String (Int, Int)
+solve t = do
+    top3 <- top3Calories . readCalories . T.pack $ t
+    let a = head top3
+    let b = sum top3
+    return (a,b)

@@ -25,6 +25,8 @@ module AdventOfCode (
   -- module NumberTheory,
   module OptParse,
   module Parser,
+  prettifyResult,
+  makePrintResultForDay,
 ) where
 
 import Control.Arrow ((>>>))
@@ -39,9 +41,10 @@ import Data.Char
 import Data.Either
 import Data.List (minimumBy, sortBy)
 import Data.Maybe
-import Data.Text (pack)
+import Data.Text (pack, Text)
 import Data.Tuple (swap)
 import Debug.Trace
+import Language.Haskell.TH
 import Lens.Micro.Platform
 
 import qualified Data.Map as M
@@ -53,3 +56,36 @@ import Grid
 -- import NumberTheory
 import OptParse
 import Parser
+
+
+prettifyResult :: (Show e, Show a, Show b) => Either e (a, b) -> String
+prettifyResult (Left e) = "AoC Error: " ++ (show e)
+prettifyResult (Right (a, b)) = "a: " ++ (show a) ++ "\nb: " ++ (show b)
+
+padDay :: Int -> String
+padDay d = if d < 10 then "0" ++ show d else show d
+
+inputFilePath :: Int -> Int -> String
+inputFilePath y d = "data/Year" ++ (show y) ++ "/day" ++ padDay d ++ ".txt"
+
+makePrintResultForDay :: Int -> [Int] -> Q [Dec]
+makePrintResultForDay  year days = do
+  let name = mkName "printResultForDay"
+  let sig = SigD name (
+              AppT (AppT ArrowT (ConT ''String)) (AppT (ConT ''IO) (TupleT 0)))
+
+  clauses <- forM days $ \d -> do
+      let fnPath = "Day" ++ padDay d ++ ".solve"
+          param = inputFilePath year d
+
+      maybeFnName <- lookupValueName fnPath
+
+      case maybeFnName of
+        Just fnName -> clause [litP (StringL $ show d)]
+          (normalB [| readFile param >>=
+                      putStrLn . prettifyResult . $(varE fnName) |])
+          []
+        Nothing -> fail $ "Could not resolve " ++ fnPath
+
+  fallback <- clause [wildP] (normalB [| putStrLn "Invalid day" |]) []
+  pure [sig, FunD name (clauses ++ [fallback]) ]

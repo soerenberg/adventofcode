@@ -1,5 +1,7 @@
 module Year2022.Day02 (toInt, score, solve) where
 
+import AdventOfCode
+
 toInt :: String -> Int
 toInt s
   | s == "B" || s == "Y" = 1
@@ -12,9 +14,9 @@ score isPartA = (s isPartA) . (map toInt)
         s False [l,r] = r * 3 + (l + r - 1) `mod` 3 + 1
         s _ _ = 0
 
-solve :: IO (Int, Int)
-solve = do input <- readFile "data/Year2022/day02.txt"
-           let ws = map words . lines $ input
-           let partA = sum . (map $ score True) $ ws
-           let partB = sum . (map $ score False) $ ws
-           return (partA, partB)
+solve :: String -> Either String (Int, Int)
+solve t = do
+   let ws = map words . lines $ t
+   let partA = sum . (map $ score True) $ ws
+   let partB = sum . (map $ score False) $ ws
+   return (partA, partB)

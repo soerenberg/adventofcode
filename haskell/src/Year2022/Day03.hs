@@ -1,5 +1,3 @@
-{-# LANGUAGE TemplateHaskell #-}
-{-# LANGUAGE OverloadedStrings #-}
 module Year2022.Day03 (solve) where
 
 import AdventOfCode
@@ -28,9 +26,9 @@ threeTups :: [a] -> [(a, a, a)]
 threeTups (x:y:z:xs) = (x, y, z) : threeTups xs
 threeTups _ = []
 
-solve :: IO (Int, Int)
-solve = do inputLines <- lines <$> readFile "data/Year2022/day03.txt"
-           let ps = map (map priority) inputLines
-           let partI = sum . map rucksackPriority $ ps
-           let partII = sum . catMaybes . map groupPriority . threeTups $ ps
-           return (partI, partII)
+solve :: String -> Either String (Int, Int)
+solve t = do let inputLines = lines t
+             let ps = map (map priority) inputLines
+             let partI = sum . map rucksackPriority $ ps
+             let partII = sum . catMaybes . map groupPriority . threeTups $ ps
+             return (partI, partII)

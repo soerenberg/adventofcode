@@ -83,6 +83,7 @@ library
     , parsec
     , pureMD5
     , random
+    , template-haskell
     , text
     , transformers
     , utf8-string
@@ -118,6 +119,7 @@ executable adventofcode2022
     , parsec
     , pureMD5
     , random
+    , template-haskell
     , text
     , transformers
     , utf8-string
@@ -153,6 +155,7 @@ executable adventofcode2024
     , parsec
     , pureMD5
     , random
+    , template-haskell
     , text
     , transformers
     , utf8-string
@@ -194,6 +197,7 @@ test-suite adventofcode-test
     , random
     , tasty
     , tasty-hunit
+    , template-haskell
     , text
     , transformers
     , utf8-string
