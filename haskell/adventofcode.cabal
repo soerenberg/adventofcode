@@ -52,6 +52,11 @@ library
       Year2024.Day16
       Year2024.Day17
       Year2024.Day18
+      Year2024.Day20
+      Year2024.Day22
+      Year2024.Day23
+      Year2024.Day24
+      Year2024.Day25
   other-modules:
       Paths_adventofcode
   autogen-modules:
