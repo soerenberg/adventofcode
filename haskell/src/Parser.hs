@@ -1,6 +1,7 @@
 module Parser
 ( --module Text.Parsec
-Parser
+  Parser
+, ParseError
 , anyChar
 , chainl
 , char
@@ -32,6 +33,7 @@ Parser
 ) where
 
 import Text.Parsec.Text (Parser)
+import Text.Parsec.Error (ParseError)
 import Text.Parsec
 
 
