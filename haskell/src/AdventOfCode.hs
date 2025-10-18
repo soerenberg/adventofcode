@@ -26,6 +26,7 @@ module AdventOfCode (
   module OptParse,
   module Parser,
   prettifyResult,
+  inputFilePath,
   makePrintResultForDay,
 ) where
 
