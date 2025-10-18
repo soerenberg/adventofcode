@@ -1,5 +1,5 @@
 {-# LANGUAGE TemplateHaskell #-}
-module Year2022.Day08 where
+module Year2022.Day08 (solve) where
 
 import qualified Data.Char as C
 import qualified Data.Map as M
