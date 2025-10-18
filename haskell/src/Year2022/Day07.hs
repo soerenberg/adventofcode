@@ -1,12 +1,65 @@
 module Year2022.Day07 where
 
 import qualified Data.Map as M
-import qualified Data.Set as S
-import Data.List
+import Text.Parsec (digit, letter, many1, oneOf)
 
 import AdventOfCode
 
 
-solve :: String -> Either String (Int, Int)
+data FileTree = Folder (M.Map String FileTree) | File Int deriving Show
+
+type Path = [String]
+
+parseTree :: Parser FileTree
+parseTree = do xs <- many $ cd <|> ls
+               let t = (Folder M.empty, [])
+               let (t', _) = foldl (\x f -> f x) t xs
+               return t'
+
+cd :: Parser ((FileTree, Path) -> (FileTree, Path))
+cd = do _ <- try $ string "$ cd "
+        f <- name <* eol
+        case f of
+          "/"  -> return (\(ft, _) -> (ft, []))
+          ".." -> return (\(ft, p) -> (ft, if null p then [] else init p))
+          x    -> return (\(ft, p) -> (ft, p ++ [x]))
+
+ls :: Parser ((FileTree, Path) -> (FileTree, Path))
+ls = do _ <- try $ string "$ ls" <* eol
+        xs <- many lsOutput
+        return (\(ft, p) -> (foldl (\q (n, r) -> insert r (p++[n]) q) ft xs, p))
+
+insert :: FileTree -> Path -> FileTree -> FileTree
+insert n [x] (Folder m) = Folder $ M.insertWith seq x n m
+insert n (x:xs) (Folder m) = Folder $ M.insert x subs m
+  where subs = insert n xs t'
+        t' = M.findWithDefault (Folder M.empty) x m
+insert _ [] f = f          -- should never happen
+insert _ _ f@(File _) = f  -- should never happen
+
+name :: Parser String
+name = many1 $ letter <|> oneOf "./"
+
+lsOutput :: Parser (String, FileTree)
+lsOutput = file <|> dir
+  where file = do s <- read <$> many1 digit <* char ' '
+                  n <- name <* eol
+                  return (n, File s)
+        dir = do n <- string "dir " >> name <* eol
+                 return (n, Folder M.empty)
+
+size :: FileTree -> Int
+size (File n) = n
+size (Folder xs) = sum . (M.map size) $ xs
+
+folderSizes :: FileTree -> [Int]
+folderSizes (File _) = []
+folderSizes x@(Folder xs) = (size x):(M.elems xs >>= folderSizes)
+
+solve :: String -> Either ParseError (Int, Int)
 solve t = do
-    Left "Day 07 not implemented."
+    sizes <- folderSizes <$> parse parseTree "" (pack t)
+    let r = sum . (filter (<=100000)) $ sizes
+    let needed = 30000000 - 70000000 + maximum sizes
+    let r' = minimum . (filter (>=needed)) $ sizes
+    return (r, r')
