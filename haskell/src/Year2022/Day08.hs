@@ -4,8 +4,6 @@ module Year2022.Day08 (solve) where
 import qualified Data.Char as C
 import qualified Data.Map as M
 import qualified Data.Set as S
-import Data.List
-import Lens.Micro.Platform ((%=), (.=), makeLenses, use)
 
 import AdventOfCode
 
@@ -49,8 +47,8 @@ epoch f p = do es <- use elevs
                  _ -> maxElev .= -1
 
 scenicScore :: Vec2 -> State IterState Int
-scenicScore p = do elevs <- use elevs
-                   let pElev = M.findWithDefault (-1) p elevs
+scenicScore p = do es <- use elevs
+                   let pElev = M.findWithDefault (-1) p es
                    maxElev .= pElev
                    a <- reset >> epoch' right (right p)
                    b <- reset >> epoch' left (left p)

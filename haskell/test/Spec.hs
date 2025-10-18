@@ -5,8 +5,6 @@ module Main
 
 import Test.Tasty (TestTree, defaultMain, testGroup)
 
-import Test.Tasty.HUnit (testCase, (@?=))
-
 import qualified Tests.Graph
 import qualified Tests.Grid
 import qualified Tests.Parser

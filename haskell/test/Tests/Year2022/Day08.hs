@@ -1,7 +1,6 @@
 {-# LANGUAGE MultilineStrings #-}
 module Tests.Year2022.Day08 (tests) where
 
-import qualified Data.Map as M
 import System.IO.Unsafe (unsafePerformIO)
 import Test.Tasty       (TestTree, testGroup)
 import Test.Tasty.HUnit (testCase, (@?=))
