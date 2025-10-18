@@ -22,14 +22,22 @@ tests = [exampleChecks, solutionChecks]
 
 exampleChecks :: TestTree
 exampleChecks = testGroup "exampleChecks"
-    [ testCase "exampleA" $ (fst <$> solution) @?= (Right 0)
-    , testCase "exampleB" $ (snd <$> solution) @?= (Right 0)
+    [ testCase "exampleA0" $ (fst <$> solve "mjqjpqmgbljsphdztnvjfqwrcgsmlb") @?= (Right 7)
+    , testCase "exampleA1" $ (fst <$> solve "bvwbjplbgvbhsrlpgdmjqwftvncz") @?= (Right 5)
+    , testCase "exampleA2" $ (fst <$> solve "nppdvjthqldpwncqszvftbrmjlhg") @?= (Right 6)
+    , testCase "exampleA3" $ (fst <$> solve "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg") @?= (Right 10)
+    , testCase "exampleA4" $ (fst <$> solve "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw") @?= (Right 11)
+    , testCase "exampleB0" $ (snd <$> solve "mjqjpqmgbljsphdztnvjfqwrcgsmlb") @?= (Right 19)
+    , testCase "exampleB1" $ (snd <$> solve "bvwbjplbgvbhsrlpgdmjqwftvncz") @?= (Right 23)
+    , testCase "exampleB2" $ (snd <$> solve "nppdvjthqldpwncqszvftbrmjlhg") @?= (Right 23)
+    , testCase "exampleB3" $ (snd <$> solve "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg") @?= (Right 29)
+    , testCase "exampleB4" $ (snd <$> solve "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw") @?= (Right 26)
     ]
   where solution = solve exampleInput
 
 solutionChecks :: TestTree
 solutionChecks = testGroup "solutionChecks"
-    [ testCase "A" $ (fst <$> solution) @?= (Right 0)
-    , testCase "B" $ (snd <$> solution) @?= (Right 0)
+    [ testCase "A" $ (fst <$> solution) @?= (Right 1582)
+    , testCase "B" $ (snd <$> solution) @?= (Right 3588)
     ]
   where solution = solve data_input
