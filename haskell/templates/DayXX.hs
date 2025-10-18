@@ -1,4 +1,4 @@
-module Year${YEAR}.Day${PADDAY} where
+module Year${YEAR}.Day${PADDAY} (solve) where
 
 import qualified Data.Map as M
 import qualified Data.Set as S
