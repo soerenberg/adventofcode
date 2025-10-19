@@ -8,6 +8,7 @@ import Test.Tasty (TestTree, defaultMain, testGroup)
 import qualified Tests.Graph
 import qualified Tests.Grid
 import qualified Tests.Parser
+import qualified Tests.Year2016
 import qualified Tests.Year2022
 
 
@@ -20,6 +21,7 @@ tests = testGroup "adventofcode tests"
   , testGroup "Grid" Tests.Grid.tests
   , testGroup "Parser" Tests.Parser.tests
   , testGroup "AoC"
-      [ testGroup "year2022" Tests.Year2022.tests
+      [ testGroup "year2016" Tests.Year2016.tests
+      , testGroup "year2022" Tests.Year2022.tests
       ]
   ]

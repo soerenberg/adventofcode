@@ -31,6 +31,31 @@ library
       Lib
       OptParse
       Parser
+      Year2016.Day01
+      Year2016.Day02
+      Year2016.Day03
+      Year2016.Day04
+      Year2016.Day05
+      Year2016.Day06
+      Year2016.Day07
+      Year2016.Day08
+      Year2016.Day09
+      Year2016.Day10
+      Year2016.Day11
+      Year2016.Day12
+      Year2016.Day13
+      Year2016.Day14
+      Year2016.Day15
+      Year2016.Day16
+      Year2016.Day17
+      Year2016.Day18
+      Year2016.Day19
+      Year2016.Day20
+      Year2016.Day21
+      Year2016.Day22
+      Year2016.Day23
+      Year2016.Day24
+      Year2016.Day25
       Year2022.Day01
       Year2022.Day02
       Year2022.Day03
@@ -92,6 +117,41 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       PSQueue
+    , aeson
+    , array
+    , base >=4.7 && <5
+    , bytestring
+    , containers
+    , logict
+    , microlens-platform
+    , mtl
+    , optparse-applicative
+    , parsec
+    , pureMD5
+    , random
+    , template-haskell
+    , text
+    , transformers
+    , utf8-string
+    , vector
+  default-language: Haskell2010
+
+executable adventofcode2016
+  main-is: Main.hs
+  other-modules:
+      Paths_adventofcode
+  autogen-modules:
+      Paths_adventofcode
+  hs-source-dirs:
+      app/Year2016
+  default-extensions:
+      BangPatterns
+      TemplateHaskell
+      TupleSections
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Year2016.Main
+  build-depends:
+      PSQueue
+    , adventofcode
     , aeson
     , array
     , base >=4.7 && <5
@@ -188,6 +248,32 @@ test-suite adventofcode-test
       Tests.Graph
       Tests.Grid
       Tests.Parser
+      Tests.Year2016
+      Tests.Year2016.Day01
+      Tests.Year2016.Day02
+      Tests.Year2016.Day03
+      Tests.Year2016.Day04
+      Tests.Year2016.Day05
+      Tests.Year2016.Day06
+      Tests.Year2016.Day07
+      Tests.Year2016.Day08
+      Tests.Year2016.Day09
+      Tests.Year2016.Day10
+      Tests.Year2016.Day11
+      Tests.Year2016.Day12
+      Tests.Year2016.Day13
+      Tests.Year2016.Day14
+      Tests.Year2016.Day15
+      Tests.Year2016.Day16
+      Tests.Year2016.Day17
+      Tests.Year2016.Day18
+      Tests.Year2016.Day19
+      Tests.Year2016.Day20
+      Tests.Year2016.Day21
+      Tests.Year2016.Day22
+      Tests.Year2016.Day23
+      Tests.Year2016.Day24
+      Tests.Year2016.Day25
       Tests.Year2022
       Tests.Year2022.Day01
       Tests.Year2022.Day02
