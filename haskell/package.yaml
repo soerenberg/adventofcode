@@ -43,6 +43,7 @@ default-extensions:
   - BangPatterns
   - TemplateHaskell
   - TupleSections
+  - OverloadedStrings
 
 ghc-options:
 - -Wall

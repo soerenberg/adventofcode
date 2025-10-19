@@ -1,6 +1,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 module Grid (
   addZ2
+, smulZ2
 , addZ4
 , boundingBox
 , dirs4
@@ -116,6 +117,9 @@ lookupSeqAt (x,y) zs = lookupSeq [(x+z,y+z') | (z,z')<-zs]
 
 addZ2 :: Z2 -> Z2 -> Z2
 addZ2 (a,b) (x,y) = (a+x, b+y)
+
+smulZ2 :: Int -> Z2 -> Z2
+smulZ2 n (a, b) = (n * a, n * b)
 
 addZ4 :: Z4 -> Z4 -> Z4
 addZ4 (a,b,c,d) (e,f,g,h) = (a+e, b+f, c+g, d+h)

@@ -21,14 +21,16 @@ tests = [exampleChecks, solutionChecks]
 
 exampleChecks :: TestTree
 exampleChecks = testGroup "exampleChecks"
-    [ testCase "exampleA" $ (fst <$> solution) @?= (Right 0)
+    [ testCase "exampleA 0" $ (fst <$> solve "R2, L3") @?= (Right 5)
+    , testCase "exampleA 1" $ (fst <$> solve "R2, R2, R2") @?= (Right 2)
+    , testCase "exampleA 2" $ (fst <$> solve "R5, L5, R5, R3") @?= (Right 12)
     , testCase "exampleB" $ (snd <$> solution) @?= (Right 0)
     ]
   where solution = solve exampleInput
 
 solutionChecks :: TestTree
 solutionChecks = testGroup "solutionChecks"
-    [ testCase "A" $ (fst <$> solution) @?= (Right 0)
+    [ testCase "A" $ (fst <$> solution) @?= (Right 226)
     , testCase "B" $ (snd <$> solution) @?= (Right 0)
     ]
   where solution = solve data_input

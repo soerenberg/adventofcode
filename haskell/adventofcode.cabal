@@ -114,6 +114,7 @@ library
       BangPatterns
       TemplateHaskell
       TupleSections
+      OverloadedStrings
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       PSQueue
@@ -148,6 +149,7 @@ executable adventofcode2016
       BangPatterns
       TemplateHaskell
       TupleSections
+      OverloadedStrings
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Year2016.Main
   build-depends:
       PSQueue
@@ -183,6 +185,7 @@ executable adventofcode2022
       BangPatterns
       TemplateHaskell
       TupleSections
+      OverloadedStrings
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Year2022.Main
   build-depends:
       PSQueue
@@ -218,6 +221,7 @@ executable adventofcode2024
       BangPatterns
       TemplateHaskell
       TupleSections
+      OverloadedStrings
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N -Wall -main-is Year2024.Main
   build-depends:
       PSQueue
@@ -309,6 +313,7 @@ test-suite adventofcode-test
       BangPatterns
       TemplateHaskell
       TupleSections
+      OverloadedStrings
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       PSQueue
