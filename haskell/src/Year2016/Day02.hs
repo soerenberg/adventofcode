@@ -1,9 +1,5 @@
 module Year2016.Day02 (solve) where
 
-import qualified Data.Map as M
-import qualified Data.Set as S
-import Data.List
-
 import AdventOfCode
 
 direction :: Parser Z2
