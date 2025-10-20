@@ -13,6 +13,7 @@ module Parser
 , line2Digits
 , lookAhead
 , many
+, many1
 , manyTill
 , nonDigits
 , nonDigits1

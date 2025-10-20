@@ -10,8 +10,10 @@ import Year2016.Day02 (solve)
 
 
 exampleInput :: String
-exampleInput = """
-"""
+exampleInput = """ULL
+RRDDD
+LURDL
+UUUUD\n"""
 
 data_input :: String
 data_input = unsafePerformIO . readFile $ inputFilePath 2016 2
@@ -21,14 +23,14 @@ tests = [exampleChecks, solutionChecks]
 
 exampleChecks :: TestTree
 exampleChecks = testGroup "exampleChecks"
-    [ testCase "exampleA" $ (fst <$> solution) @?= (Right 0)
-    , testCase "exampleB" $ (snd <$> solution) @?= (Right 0)
+    [ testCase "exampleA" $ (fst <$> solution) @?= (Right "1985")
+    , testCase "exampleB" $ (snd <$> solution) @?= (Right "5DB3")
     ]
   where solution = solve exampleInput
 
 solutionChecks :: TestTree
 solutionChecks = testGroup "solutionChecks"
-    [ testCase "A" $ (fst <$> solution) @?= (Right 0)
+    [ testCase "A" $ (fst <$> solution) @?= (Right "35749")
     , testCase "B" $ (snd <$> solution) @?= (Right 0)
     ]
   where solution = solve data_input
