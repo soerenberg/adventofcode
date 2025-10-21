@@ -1,6 +1,7 @@
 module Count
 ( aggByKey
 , frequencies
+, frequencies'
 , groupBy
 , groupByList
 , mostCommon
@@ -25,6 +26,9 @@ groupByList xs f = map (\(k,vs) -> (k, f vs)) . aggByKey $ xs
 
 frequencies :: Ord a => [a] -> [(a, Int)]
 frequencies xs = groupBy (map (\x -> (x,1)) xs) (+)
+
+frequencies' :: Ord a => [a] -> [(a, Int)]
+frequencies' = L.sortBy (flip $ comparing snd) . frequencies
 
 mostCommon :: Ord a => [a] -> (a, Int)
 mostCommon = L.maximumBy (comparing snd) . frequencies
