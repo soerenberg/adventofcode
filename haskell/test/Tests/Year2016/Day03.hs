@@ -12,8 +12,7 @@ import Year2016.Day03 (solve)
 exampleInput :: String
 exampleInput = """5 10 25
 10 10 10
-11 12 13
-"""
+11 12 13\n"""
 
 data_input :: String
 data_input = unsafePerformIO . readFile $ inputFilePath 2016 3
@@ -24,13 +23,13 @@ tests = [exampleChecks, solutionChecks]
 exampleChecks :: TestTree
 exampleChecks = testGroup "exampleChecks"
     [ testCase "exampleA" $ (fst <$> solution) @?= (Right 2)
-    , testCase "exampleB" $ (snd <$> solution) @?= (Right 0)
+    , testCase "exampleB" $ (snd <$> solution) @?= (Right 2)
     ]
   where solution = solve exampleInput
 
 solutionChecks :: TestTree
 solutionChecks = testGroup "solutionChecks"
     [ testCase "A" $ (fst <$> solution) @?= (Right 993)
-    , testCase "B" $ (snd <$> solution) @?= (Right 0)
+    , testCase "B" $ (snd <$> solution) @?= (Right 1849)
     ]
   where solution = solve data_input

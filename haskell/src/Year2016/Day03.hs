@@ -6,11 +6,16 @@ import Data.List
 
 import AdventOfCode
 
-isValidTri :: (Int,Int,Int) -> Bool
-isValidTri (a,b,c) = a+b>c && a+c>b && b+c>a
+countTris :: [(Int,Int,Int)] -> Int
+countTris = length . filter isValid
+  where isValid (a,b,c) = a+b>c && a+c>b && b+c>a
+
+toB :: [(Int,Int,Int)] -> [(Int,Int,Int)]
+toB [] = []
+toB ((a,b,c):(d,e,f):(g,h,i):xs) = (a,d,g):(b,e,h):(c,f,i):(toB xs)
+toB _ = [] -- should never happen
 
 solve :: String -> Either ParseError (Int, Int)
 solve t = do
-    input <- parse (many line3Digits) "" (pack t)
-    let x = length $ filter isValidTri input
-    pure (x,1)
+    ts <- parse (many line3Digits) "" (pack t)
+    pure (countTris ts, countTris . toB $ ts)
