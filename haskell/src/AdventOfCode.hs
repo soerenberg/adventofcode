@@ -26,6 +26,7 @@ module AdventOfCode (
   -- module NumberTheory,
   module OptParse,
   module Parser,
+  notImplementedMsg,
   prettifyResult,
   inputFilePath,
   makePrintResultForDay,
@@ -48,9 +49,6 @@ import Data.Tuple (swap)
 import Debug.Trace
 import Language.Haskell.TH
 import Lens.Micro.Platform
-
-import qualified Data.Map as M
-import qualified Data.Set as S
 
 import Count
 import Graph
