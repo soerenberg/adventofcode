@@ -1,24 +1,13 @@
-module Year2016.Day04 (solve, sortPairs) where
+module Year2016.Day04 (solve, sortPairs, shiftLt) where
 
-import qualified Data.Map as M
-import qualified Data.Set as S
-import Data.List
 import Text.Parsec (endBy)
 import Data.Ord  (comparing, Down(..))
 
 import AdventOfCode
 
-exampleInput :: String
-exampleInput = """aaaaa-bbb-z-y-x-123[abxyz]
-a-b-c-d-e-f-g-h-987[abcde]
-not-a-real-room-404[oarel]
-totally-real-room-200[decoy]\n"""
-
 line :: Parser ([String], Int, String)
 line = do
     xs <- letters `endBy` (char '-')
-    -- xs <- manyTill (letters <* char '-') (lookAhead digits)
-    -- char '-'
     n <- digits
     s <- char '[' >> letters <* char ']' <* eol
     return (xs, n, s)
@@ -30,8 +19,22 @@ isReal :: ([String], Int, String) -> Bool
 isReal (xs, _, s) = ys == s
   where ys = map fst . take 5 . sortPairs . frequencies . mconcat $ xs
 
-solve :: String -> Either ParseError (String, Int)
+shiftLt :: Int -> Char -> Char
+shiftLt i c = chr $ ((ord c - start + i) `mod` m) + start
+  where (start, end) = (ord 'a', ord 'z')
+        m = end-start+1
+
+decrypt :: ([String], Int, String) -> String
+decrypt (xs, n, _) = map (shiftLt n) . mconcat $ xs
+
+isNorthPole :: String -> Bool
+isNorthPole xs = take (length s) xs == s
+  where s = "northpole"
+
+solve :: String -> Either ParseError (Int, Int)
 solve t = do
     input <- parse (many line) "" (pack t)
-    let x = sum . map (\(_,n,_) -> n) . filter isReal $ input
-    pure (show $ input, x)
+    let x = sum . map sec . filter isReal $ input
+    let z = sum . map sec . filter (isNorthPole . decrypt) $ input
+    pure (x, z)
+  where sec = \(_,n,_) -> n
