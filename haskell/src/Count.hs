@@ -5,6 +5,8 @@ module Count
 , groupByList
 , mostCommon
 , mostCommon'
+, leastCommon
+, leastCommon'
 )
 where
 
@@ -29,3 +31,9 @@ mostCommon = L.maximumBy (comparing snd) . frequencies
 
 mostCommon' :: Ord a => [a] -> a
 mostCommon' = fst . mostCommon
+
+leastCommon :: Ord a => [a] -> (a, Int)
+leastCommon = L.minimumBy (comparing snd) . frequencies
+
+leastCommon' :: Ord a => [a] -> a
+leastCommon' = fst . leastCommon

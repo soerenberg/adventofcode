@@ -43,4 +43,15 @@ tests =
     , testCase "simple" $ mostCommon' "abacba" @?= 'a'
     , testCase "tie" $ mostCommon' "abab" @?= 'b'
     ]
+  , testGroup "leastCommon"
+    [ testCase "singleton" $ leastCommon "a" @?= ('a',1)
+    , testCase "duplicate" $ leastCommon "aa" @?= ('a',2)
+    , testCase "simple" $ leastCommon "abacba" @?= ('c',1)
+    , testCase "tie" $ leastCommon "abab" @?= ('a',2)
+    ]
+  , testGroup "leastCommon'"
+    [ testCase "singleton" $ leastCommon' "a" @?= 'a'
+    , testCase "simple" $ leastCommon' "abacba" @?= 'c'
+    , testCase "tie" $ leastCommon' "cababcc" @?= 'a'
+    ]
   ]

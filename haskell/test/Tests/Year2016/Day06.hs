@@ -36,13 +36,13 @@ tests = [exampleChecks, solutionChecks]
 exampleChecks :: TestTree
 exampleChecks = testGroup "exampleChecks"
     [ testCase "exampleA" $ (fst <$> solution) @?= (Right "easter")
-    , testCase "exampleB" $ (snd <$> solution) @?= (Right 0)
+    , testCase "exampleB" $ (snd <$> solution) @?= (Right "advent")
     ]
   where solution = solve exampleInput
 
 solutionChecks :: TestTree
 solutionChecks = testGroup "solutionChecks"
     [ testCase "A" $ (fst <$> solution) @?= (Right "umcvzsmw")
-    , testCase "B" $ (snd <$> solution) @?= (Right 0)
+    , testCase "B" $ (snd <$> solution) @?= (Right "rwqoacfz")
     ]
   where solution = solve data_input
