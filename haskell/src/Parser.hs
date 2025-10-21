@@ -11,6 +11,7 @@ module Parser
 , letters
 , lineDigit
 , line2Digits
+, line3Digits
 , lookAhead
 , many
 , many1
@@ -86,5 +87,11 @@ signedFloat = do s <- option 1.0 ((char '+' >> return 1.0) <|>
 lineDigit :: Parser Int
 lineDigit = (nonDigits >> digits) <* nonDigits <* eol
 
+anyThenDigits :: Parser Int
+anyThenDigits = nonDigits >> digits
+
 line2Digits :: Parser (Int, Int)
-line2Digits = (,) <$> (nonDigits >> digits) <*> (nonDigits >> digits) <* eol
+line2Digits = (,) <$> anyThenDigits <*> anyThenDigits <* eol
+
+line3Digits :: Parser (Int, Int, Int)
+line3Digits = (,,) <$> anyThenDigits <*> anyThenDigits <*> anyThenDigits <* eol
