@@ -60,6 +60,8 @@ import Grid
 import OptParse
 import Parser
 
+notImplementedMsg :: String -> String
+notImplementedMsg d = "Day " ++ d ++ " not implemented."
 
 prettifyResult :: (Show e, Show a, Show b) => Either e (a, b) -> String
 prettifyResult (Left e) = "AoC Error: " ++ (show e)
