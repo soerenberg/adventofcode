@@ -5,6 +5,7 @@ module Main
 
 import Test.Tasty (TestTree, defaultMain, testGroup)
 
+import qualified Tests.Count
 import qualified Tests.Graph
 import qualified Tests.Grid
 import qualified Tests.Parser
@@ -17,7 +18,8 @@ main = defaultMain tests
 
 tests :: TestTree
 tests = testGroup "adventofcode tests"
-  [ testGroup "Graph" Tests.Graph.tests
+  [ testGroup "Count" Tests.Count.tests
+  , testGroup "Graph" Tests.Graph.tests
   , testGroup "Grid" Tests.Grid.tests
   , testGroup "Parser" Tests.Parser.tests
   , testGroup "AoC"

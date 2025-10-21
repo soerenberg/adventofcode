@@ -19,6 +19,7 @@ module AdventOfCode (
   minimumBy,
   sortBy,
 
+  module Count,
   module Graph,
   module Grid,
   -- module LogicProgramming,
@@ -51,6 +52,7 @@ import Lens.Micro.Platform
 import qualified Data.Map as M
 import qualified Data.Set as S
 
+import Count
 import Graph
 import Grid
 -- import LogicProgramming

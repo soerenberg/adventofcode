@@ -3,8 +3,8 @@ import qualified Data.Map as M
 import qualified Data.Set as S
 import AdventOfCode
 
-groupBy :: Grid Char -> [[Z2]]
-groupBy = M.elems. M.fromListWith (++)
+groupBy' :: Grid Char -> [[Z2]]
+groupBy' = M.elems. M.fromListWith (++)
           . map (\(z, c)->(c, [z]))
           . (filter ((/='.') . snd))
           . M.toList
@@ -37,6 +37,6 @@ countAntinodes f groups = S.size . S.fromList $ groups >>= makeAntinodes f
 solve :: IO (Int, Int)
 solve = do ls <- lines <$> readFile "data/Year2024/day08.txt"
            let bounds = (length ls, length . (!!0) $ ls)
-           let groups = groupBy . fromLines id $ ls
+           let groups = groupBy' . fromLines id $ ls
            return (countAntinodes (leapSingle bounds) groups,
                    countAntinodes (leapAll bounds) groups)

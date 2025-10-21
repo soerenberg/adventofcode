@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       AdventOfCode
+      Count
       Graph
       Grid
       Lib
@@ -112,6 +113,7 @@ library
       src
   default-extensions:
       BangPatterns
+      MultilineStrings
       TemplateHaskell
       TupleSections
       OverloadedStrings
@@ -147,6 +149,7 @@ executable adventofcode2016
       app/Year2016
   default-extensions:
       BangPatterns
+      MultilineStrings
       TemplateHaskell
       TupleSections
       OverloadedStrings
@@ -183,6 +186,7 @@ executable adventofcode2022
       app/Year2022
   default-extensions:
       BangPatterns
+      MultilineStrings
       TemplateHaskell
       TupleSections
       OverloadedStrings
@@ -219,6 +223,7 @@ executable adventofcode2024
       app/Year2024
   default-extensions:
       BangPatterns
+      MultilineStrings
       TemplateHaskell
       TupleSections
       OverloadedStrings
@@ -249,6 +254,7 @@ test-suite adventofcode-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Tests.Count
       Tests.Graph
       Tests.Grid
       Tests.Parser
@@ -311,6 +317,7 @@ test-suite adventofcode-test
       test
   default-extensions:
       BangPatterns
+      MultilineStrings
       TemplateHaskell
       TupleSections
       OverloadedStrings
