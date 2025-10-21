@@ -2,7 +2,6 @@ module Year2016.Main (main) where
 
 import AdventOfCode
 import qualified Year2016.Day01 as Day01
-import qualified Year2016.Day01 as Day01
 import qualified Year2016.Day02 as Day02
 import qualified Year2016.Day03 as Day03
 import qualified Year2016.Day04 as Day04
