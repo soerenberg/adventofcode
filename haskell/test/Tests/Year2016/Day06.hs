@@ -10,8 +10,22 @@ import Year2016.Day06 (solve)
 
 
 exampleInput :: String
-exampleInput = """
-"""
+exampleInput = """eedadn
+drvtee
+eandsr
+raavrd
+atevrs
+tsrnev
+sdttsa
+rasrtv
+nssdts
+ntnada
+svetve
+tesnvt
+vntsnd
+vrdear
+dvrsen
+enarar"""
 
 data_input :: String
 data_input = unsafePerformIO . readFile $ inputFilePath 2016 6
@@ -21,14 +35,14 @@ tests = [exampleChecks, solutionChecks]
 
 exampleChecks :: TestTree
 exampleChecks = testGroup "exampleChecks"
-    [ testCase "exampleA" $ (fst <$> solution) @?= (Right 0)
+    [ testCase "exampleA" $ (fst <$> solution) @?= (Right "easter")
     , testCase "exampleB" $ (snd <$> solution) @?= (Right 0)
     ]
   where solution = solve exampleInput
 
 solutionChecks :: TestTree
 solutionChecks = testGroup "solutionChecks"
-    [ testCase "A" $ (fst <$> solution) @?= (Right 0)
+    [ testCase "A" $ (fst <$> solution) @?= (Right "umcvzsmw")
     , testCase "B" $ (snd <$> solution) @?= (Right 0)
     ]
   where solution = solve data_input
