@@ -22,6 +22,7 @@ module AdventOfCode (
   module Count,
   module Graph,
   module Grid,
+  module Hash,
   -- module LogicProgramming,
   -- module NumberTheory,
   module OptParse,
@@ -53,6 +54,7 @@ import Lens.Micro.Platform
 import Count
 import Graph
 import Grid
+import Hash
 -- import LogicProgramming
 -- import NumberTheory
 import OptParse
