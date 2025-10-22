@@ -43,7 +43,7 @@ import Control.Monad.State.Lazy
 import Data.Bits
 import Data.Char
 import Data.Either
-import Data.List (minimumBy, sortBy)
+import Data.List (dropWhileEnd, minimumBy, sortBy)
 import Data.Maybe
 import Data.Text (pack, Text)
 import Data.Tuple (swap)
@@ -87,7 +87,7 @@ makePrintResultForDay  year days = do
 
       case maybeFnName of
         Just fnName -> clause [litP (StringL $ show d)]
-          (normalB [| readFile param >>=
+          (normalB [| dropWhileEnd (== '\n') <$> readFile param >>=
                       putStrLn . prettifyResult . $(varE fnName) |])
           []
         Nothing -> fail $ "Could not resolve " ++ fnPath

@@ -6,7 +6,12 @@ import Data.List
 
 import AdventOfCode
 
+isValid :: String -> Bool
+isValid = (== "00000") . take 5
 
-solve :: String -> Either String (Int, Int)
+srch :: String -> String
+srch s = take 8 [h !! 5 | i <- [0..], let h = strMD5 (s ++ (show i)), isValid h]
+
+solve :: String -> Either String (String, String)
 solve t = do
-    Left "Day 05 not implemented."
+    pure (srch t, "")

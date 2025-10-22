@@ -29,6 +29,7 @@ library
       Count
       Graph
       Grid
+      Hash
       Lib
       OptParse
       Parser
