@@ -25,6 +25,7 @@ dependencies:
 - array
 - bytestring
 - containers
+- either
 - microlens-platform
 - mtl
 - logict

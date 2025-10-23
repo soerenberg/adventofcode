@@ -126,6 +126,7 @@ library
     , base >=4.7 && <5
     , bytestring
     , containers
+    , either
     , logict
     , microlens-platform
     , mtl
@@ -163,6 +164,7 @@ executable adventofcode2016
     , base >=4.7 && <5
     , bytestring
     , containers
+    , either
     , logict
     , microlens-platform
     , mtl
@@ -200,6 +202,7 @@ executable adventofcode2022
     , base >=4.7 && <5
     , bytestring
     , containers
+    , either
     , logict
     , microlens-platform
     , mtl
@@ -237,6 +240,7 @@ executable adventofcode2024
     , base >=4.7 && <5
     , bytestring
     , containers
+    , either
     , logict
     , microlens-platform
     , mtl
@@ -331,6 +335,7 @@ test-suite adventofcode-test
     , base >=4.7 && <5
     , bytestring
     , containers
+    , either
     , logict
     , microlens-platform
     , mtl

@@ -16,6 +16,7 @@ module AdventOfCode (
   module Debug.Trace,
   module Lens.Micro.Platform,
 
+  maybeToRight,
   minimumBy,
   sortBy,
 
@@ -43,6 +44,7 @@ import Control.Monad.State.Lazy
 import Data.Bits
 import Data.Char
 import Data.Either
+import Data.Either.Combinators (maybeToRight)
 import Data.List (dropWhileEnd, minimumBy, sortBy)
 import Data.Maybe
 import Data.Text (pack, Text)
