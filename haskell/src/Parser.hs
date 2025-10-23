@@ -8,6 +8,7 @@ module Parser
 , digits
 , eof
 , eol
+, eolf
 , letters
 , lineDigit
 , line2Digits
@@ -22,6 +23,7 @@ module Parser
 , nonSignedDigits1
 , parse
 , sepBy
+, sepBy1
 , sepEndBy
 , signedFloat
 , signedInt
@@ -41,6 +43,9 @@ import Text.Parsec
 
 eol :: Parser Char
 eol = char '\n'
+
+eolf :: Parser ()
+eolf = (char '\n' >> pure ()) <|> eof
 
 whitespaceEOL :: Parser String
 whitespaceEOL = many $ oneOf " \t\n"
