@@ -1,4 +1,6 @@
 {-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE UndecidableInstances #-}
 module AdventOfCode (
   module Control.Arrow,
   module Control.Monad,
@@ -65,9 +67,20 @@ import Parser
 notImplementedMsg :: String -> String
 notImplementedMsg d = "Day " ++ d ++ " not implemented."
 
-prettifyResult :: (Show e, Show a, Show b) => Either e (a, b) -> String
-prettifyResult (Left e) = "AoC Error: " ++ (show e)
-prettifyResult (Right (a, b)) = "a: " ++ (show a) ++ "\nb: " ++ (show b)
+-- Define Display typeclass in order to avoid having newlines escaped if a
+-- solution contains a string with linebreaks
+class Display a where
+  display :: a -> String
+
+instance {-# OVERLAPPABLE #-} (Show a) => Display a where
+  display = show
+
+instance {-# OVERLAPPING #-} Display String where
+  display = id
+
+prettifyResult :: (Display e, Display a, Display b) => Either e (a, b) -> String
+prettifyResult (Left e) = "AoC Error: " ++ (display e)
+prettifyResult (Right (a, b)) = "a: " ++ (display a) ++ "\nb: " ++ (display b)
 
 padDay :: Int -> String
 padDay d = if d < 10 then "0" ++ show d else show d
