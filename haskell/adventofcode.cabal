@@ -106,6 +106,7 @@ library
       Year2024.Day23
       Year2024.Day24
       Year2024.Day25
+      Zn
   other-modules:
       Paths_adventofcode
   autogen-modules:
@@ -315,6 +316,7 @@ test-suite adventofcode-test
       Tests.Year2022.Day23
       Tests.Year2022.Day24
       Tests.Year2022.Day25
+      Tests.Zn
       Paths_adventofcode
   autogen-modules:
       Paths_adventofcode

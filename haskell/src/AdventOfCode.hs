@@ -30,6 +30,7 @@ module AdventOfCode (
   -- module NumberTheory,
   module OptParse,
   module Parser,
+  module Zn,
   notImplementedMsg,
   prettifyResult,
   inputFilePath,
@@ -63,6 +64,7 @@ import Hash
 -- import NumberTheory
 import OptParse
 import Parser
+import Zn
 
 notImplementedMsg :: String -> String
 notImplementedMsg d = "Day " ++ d ++ " not implemented."
