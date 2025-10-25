@@ -32,4 +32,5 @@ solve t = do
     ls <- parse (many line) "" (pack t)
     let final =  foldl (flip ($)) (const False) $ map applyInstr ls
     let nLit = length. filter final $ [(x,y) | x<-[0..(width-1)], y<-[0..(height-1)]]
-    pure (nLit, "")
+    let visGrid = unlines . printFGrid width height $ final
+    pure (nLit, "\n" ++ visGrid)
