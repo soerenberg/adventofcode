@@ -9,26 +9,22 @@ import AdventOfCode
 import Year2016.Day08 (solve)
 
 
-exampleInput :: String
-exampleInput = """
-"""
-
 data_input :: String
 data_input = unsafePerformIO . readFile $ inputFilePath 2016 8
 
 tests :: [TestTree]
-tests = [exampleChecks, solutionChecks]
+tests = [solutionChecks]
 
-exampleChecks :: TestTree
-exampleChecks = testGroup "exampleChecks"
-    [ testCase "exampleA" $ (fst <$> solution) @?= (Right 0)
-    , testCase "exampleB" $ (snd <$> solution) @?= (Right 0)
-    ]
-  where solution = solve exampleInput
+expectedB = """\n###..#..#.###..#..#..##..####..##..####..###.#....
+#..#.#..#.#..#.#..#.#..#.#....#..#.#......#..#....
+#..#.#..#.#..#.#..#.#....###..#..#.###....#..#....
+###..#..#.###..#..#.#....#....#..#.#......#..#....
+#.#..#..#.#.#..#..#.#..#.#....#..#.#......#..#....
+#..#..##..#..#..##...##..####..##..####..###.####.\n"""
 
 solutionChecks :: TestTree
 solutionChecks = testGroup "solutionChecks"
-    [ testCase "A" $ (fst <$> solution) @?= (Right 0)
-    , testCase "B" $ (snd <$> solution) @?= (Right 0)
+    [ testCase "A" $ (fst <$> solution) @?= (Right 121)
+    , testCase "B" $ (snd <$> solution) @?= (Right expectedB)  -- Remark: RURUCEOEIL
     ]
   where solution = solve data_input

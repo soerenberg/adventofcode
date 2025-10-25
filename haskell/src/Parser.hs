@@ -10,6 +10,8 @@ module Parser
 , eol
 , eolf
 , letters
+, any2Digits
+, any3Digits
 , lineDigit
 , line2Digits
 , line3Digits
@@ -95,8 +97,14 @@ lineDigit = (nonDigits >> digits) <* nonDigits <* eol
 anyThenDigits :: Parser Int
 anyThenDigits = nonDigits >> digits
 
+any2Digits :: Parser (Int, Int)
+any2Digits = (,) <$> anyThenDigits <*> anyThenDigits
+
+any3Digits :: Parser (Int, Int, Int)
+any3Digits = (,,) <$> anyThenDigits <*> anyThenDigits <*> anyThenDigits
+
 line2Digits :: Parser (Int, Int)
-line2Digits = (,) <$> anyThenDigits <*> anyThenDigits <* eol
+line2Digits = any2Digits <* eol
 
 line3Digits :: Parser (Int, Int, Int)
-line3Digits = (,,) <$> anyThenDigits <*> anyThenDigits <*> anyThenDigits <* eol
+line3Digits = any3Digits <* eol
