@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Tests.Grid (tests) where
+module Tests.Zn (tests) where
 
 import Data.Char (toUpper)
 import Data.Either      (isLeft)
