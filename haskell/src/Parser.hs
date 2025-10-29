@@ -5,6 +5,7 @@ module Parser
 , anyChar
 , chainl
 , char
+, count
 , digits
 , eof
 , eol
