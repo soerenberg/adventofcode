@@ -8,6 +8,7 @@ import Test.Tasty       (TestTree, testGroup)
 import Test.Tasty.HUnit (assertBool, testCase, (@?=))
 
 import Grid
+import Zn
 
 tests :: [TestTree]
 tests =
