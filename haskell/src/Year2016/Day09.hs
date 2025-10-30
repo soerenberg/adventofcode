@@ -9,14 +9,20 @@ import Debug.Trace (trace)
 
 import AdventOfCode
 
-p :: Parser String
-p = concat <$> many1 (letters <|> marker)
-  where marker = do m <- char '(' >> digits <* char 'x'
+countLength :: Bool -> Parser Int
+countLength isB = sum <$> many1 (l <|> marker)
+  where l = length <$> letters
+        marker = do m <- char '(' >> digits <* char 'x'
                     n <- digits <* char ')'
                     xs <- count m anyChar
-                    pure . concat . replicate n  $ xs
+                    if isB
+                    then do let ys = concat . replicate n $ xs
+                            let z = parse (countLength isB) "" (pack ys)
+                            pure . fromRight 0 $ z
+                    else pure $ n * m
 
 solve :: String -> Either ParseError (Int, Int)
 solve t = do
-    t <- parse p "" (pack t)
-    pure (length t,0)
+    a <- parse (countLength False) "" (pack t)
+    b <- parse (countLength True) "" (pack t)
+    pure (a, b)
