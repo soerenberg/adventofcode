@@ -57,4 +57,5 @@ solve t = do
     xs <- mapLeft show $ parse (many line) "" (pack t)
     let (initState, instr) = makeInit xs
     (a, m) <- maybeToRight "fail: no solution" $ iter (==(S.fromList [17,61])) initState instr Nothing M.empty
-    pure (a,0)
+    let b = product . catMaybes $ [M.lookup 0 m, M.lookup 1 m, M.lookup 2 m]
+    pure (a,b)
